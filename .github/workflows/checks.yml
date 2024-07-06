@@ -8,7 +8,7 @@ jobs:
     name: Test and lint
     runs-on: ubuntu-20.04
     steps:
-      - name: loging to Docker hub
+      - name: Loging to Docker Hub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
