@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: loging to Docker hub
         uses: docker/login-acion@v1
-        wwith:
+        with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOKERHUB_TOKEN }}
       - name: Checkout
@@ -20,4 +20,4 @@ jobs:
         run: docker-compose run --rm app sh -c "python manage.py test"
 
       - name: Lint
-        run: docker-compose run -rm app sh -c "flake8"
+        run: docker-compose run --rm app sh -c "flake8"
