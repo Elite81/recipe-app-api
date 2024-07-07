@@ -22,13 +22,15 @@ jobs:
         run: docker-compose -f Docker-compose.yml run --rm app sh -c "python manage.py test"
 
       - name: Lint
-        run: Docker-compose run --rm app sh -c "flake8"
+        run: docker-compose -f Docker-compose.yml run --rm app sh -c "flake8"
+
+      # - name: Lint
+      #   run: Docker-compose run --rm app sh -c "flake8"
 
       # - name: Build Docker image
       #   run: docker-compose build --build-arg DEV=true
 
-      # - name: Lint
-      #   run: docker-compose -f Docker-compose.yml run --rm app sh -c "flake8"
+    
 
 
       # - name: Test
