@@ -6,7 +6,7 @@ ENV PYTHONUNBUFFERED 1
 
 # copy our requirements.txt file into the docker image
 COPY ./requirements.txt /tmp/requirements.txt
-COPY ./requirements.dev.txt /temp/requirements.txt
+COPY ./requirements.dev.txt /tmp/requirements.txt
 
 #copy into our app derectory in the the app containter
 COPY ./app /app
