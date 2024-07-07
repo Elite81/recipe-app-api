@@ -16,10 +16,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         
-
       - name: Test
-        run: docker-compose run --rm app sh -c "python manage.py test"
-        # working-directory: recipe-app-api
+        run: docker-compose -f Docker-compose.yml run --rm app sh -c "python manage.py test"
+        working-directory: recipe-app-api
   
       - name: Lint
-        run: docker-compose run --rm app sh -c "flake8"
+        run: docker-compose -f Docker-compose.yml run --rm app sh -c "flake8"
+        working-directory: recipe-app-api
+
+      # - name: Test
+      #   run: Docker-compose run --rm app sh -c "python manage.py test"
+      #   # working-directory: recipe-app-api
+  
+      # - name: Lint
+      #   run: Docker-compose run --rm app sh -c "flake8"
