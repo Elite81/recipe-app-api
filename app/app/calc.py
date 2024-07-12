@@ -1,15 +1,19 @@
-'''
+"""
 calculator function
-'''
+"""
+
 
 def add(x, y):
     return x + y
 
-def subtrucat(x,y):
+
+def subtrucat(x, y):
     return x - y
 
-def multiply(x,y):
+
+def multiply(x, y):
     return x * y
 
-def divide(x,y):
+
+def divide(x, y):
     return x / y
