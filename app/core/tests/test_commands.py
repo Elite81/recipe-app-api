@@ -24,11 +24,9 @@ class CommandTests(SimpleTestCase):
     @patch("time.sleep")
     def test_wait_for_db_delay(self, patched_sleep, patched_check):
         """Test waiting for database get operation error"""
-        if patched_check.side_effect is not None:
-            patched_check.side_effect = list(patched_check.side_effect)
-            patched_check.side_effect = [Pscop2gError] * 2
-            patched_check.side_effect += [OperationalError] * 3
-            patched_check.side_effect += [True]
+
+        patched_check.side_effect = [
+                Pscop2gError] * 2 + [OperationalError] * 3 + [True]
 
         call_command("wait_for_db")
 
