@@ -25,9 +25,9 @@ class CommandTests(SimpleTestCase):
     def test_wait_for_db_delay(self, patched_sleep, patched_check):
         """Test waiting for database get operation error"""
         patched_check.side_effect = [Pscop2gError] * 2
-        patched_check.side_effect += +[OperationalError] * 3
+        patched_check.side_effect += [OperationalError] * 3
         patched_check.side_effect += [True]
-        
+
         call_command("wait_for_db")
 
         self.assertEqual(patched_check.call_count, 6)
