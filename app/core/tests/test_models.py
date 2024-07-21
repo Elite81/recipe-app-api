@@ -2,12 +2,14 @@
 
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from decimal import Decimal
 
+from core import models
 
 class ModelTests(TestCase):
     """Test modles"""
 
-    def test_create_usser_with_email_successfu(self):
+    def test_create_usser_with_email_successful(self):
         email = "test@example.com"
         password = "testpass123"
         user = get_user_model().objects.create_user(
@@ -37,11 +39,29 @@ class ModelTests(TestCase):
         with self.assertRaises(ValueError):
             get_user_model().objects.create_user("", "test123")
 
-    def tst_create_superuser(self):
+    def test_create_superuser(self):
         """Test createing a superuser."""
         user = get_user_model().objects.create_superuser(
             "test@example.come",
             "test123",
         )
-        self.assetTrue(user.is_superuser)
+        self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+
+    def test_create_recipe(self):
+        '''Test creating a recipe is successful'''
+        user = get_user_model().objects.create_user(
+            'test@example.com',
+            'testpass123',
+        )
+
+        recipe = models.Recipe.objects.create(
+            user=user,
+            title = 'Sample recipe name',
+            time_minutes=5,
+            price = Decimal('5.50'),
+            description = 'Sample recipe description'
+        )
+
+        self.assertEqual(str(recipe), recipe.title)
