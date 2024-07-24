@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+
 '''Views for the recipe API '''
 
 from rest_framework import viewsets
