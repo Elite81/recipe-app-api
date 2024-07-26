@@ -1,4 +1,4 @@
-"""Serializers fot the user API View"""
+"""Serializers fo the user API View"""
 
 from django.contrib.auth import get_user_model, authenticate
 from django.utils.translation import gettext as _
@@ -29,7 +29,7 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-class AuthokentSerializer(serializers.Serializer):
+class AuthTokentSerializer(serializers.Serializer):
     """Serialiazer for the user auth token."""
 
     email = serializers.EmailField()
@@ -49,7 +49,7 @@ class AuthokentSerializer(serializers.Serializer):
         )
 
         if not user:
-            msg = _("Unable to authenticate with previous credentials.")
+            msg = _("Unable to authenticate with provided credentials.")
             raise serializers.ValidationError(msg, code="authorization")
 
         attrs["user"] = user
