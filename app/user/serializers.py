@@ -29,7 +29,7 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-class AuthTokentSerializer(serializers.Serializer):
+class AuthtTokentSerializer(serializers.Serializer):
     """Serialiazer for the user auth token."""
 
     email = serializers.EmailField()

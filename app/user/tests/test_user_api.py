@@ -49,7 +49,9 @@ class PublicUserApiTests(TestCase):
 
     def test_paassword_too_short_error(self):
         """test an error is returned if paasswrod less than 5 chars."""
-        payload = {"email": "test@example.com", "password": "test", "name": "test Name"}
+        payload = {"email": "test@example.com",
+                   "password": "test",
+                   "name": "test Name"}
         res = self.client.post(CREATE_USER_URL, payload)
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
         user_exists = get_user_model().objects.filter(email=payload["email"]).exists()
@@ -57,13 +59,14 @@ class PublicUserApiTests(TestCase):
 
 
     def test_create_token_for_user(self):
-        """Test generates token of valid credentials"""
+        """Test generates token for valid credentials"""
 
         user_details = {
             "name": "test Name",
-            "password": "testpass123",
+            "password": "test-user-password-123",
             "email": "test@example.com",
         }
+        create_user(**user_details)
 
         payload = {
             "email": user_details["email"],
@@ -71,20 +74,21 @@ class PublicUserApiTests(TestCase):
             # "name": user_details["name"],
         }
         res = self.client.post(TOKEN_URL, payload)
-        print(res.data)
+        # print(f'Hello: {res.data}')
 
         if "token" not in res.data:
             print(f"Error message: {res.data.get('error', 'No error message')}")
-
-
         self.assertIn("token", res.data)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
 
     def test_create_token_bad_credentials(self):
         """Test return error if credentials invalid."""
-        create_user(name="test Name", password="goodpass", email="test@example.com")
-        payload = {"email": "test@example.com", "password": "badpass"}
+        create_user(name="test Name",
+                    password="goodpass",
+                    email="test@example.com")
+        payload = {"email": "test@example.com",
+                   "password": "badpass"}
         res = self.client.post(TOKEN_URL, payload)
 
         self.assertNotIn("token", res.data)
